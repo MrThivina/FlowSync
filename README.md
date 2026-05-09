@@ -12,7 +12,7 @@ FlowSync is a Python project workspace. The repository currently contains an ear
 Clone the repository:
 
 ```powershell
-git clone <repository-url>
+git clone https://github.com/MrThivina/FlowSync
 cd FlowSync
 ```
 
