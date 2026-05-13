@@ -6,18 +6,19 @@
     <title>FlowSync Supermarket POS</title>
     <style>
         :root {
-            --ink: #172126;
-            --muted: #65737b;
-            --line: #dbe5e7;
-            --paper: #f4f8f6;
+            --ink: #172029;
+            --muted: #6a7782;
+            --line: #e3eaf0;
+            --paper: #f7fafc;
             --white: #ffffff;
-            --green: #1e7a4d;
-            --green-dark: #125a37;
-            --teal: #0f6f7a;
-            --blue: #285fa8;
-            --amber: #b36a00;
-            --red: #b73535;
-            --shadow: 0 14px 34px rgba(23, 33, 38, 0.12);
+            --green: #19a66a;
+            --green-dark: #107346;
+            --teal: #0c8ea0;
+            --blue: #3767d6;
+            --amber: #d68612;
+            --red: #d14343;
+            --violet: #6b5bd6;
+            --shadow: 0 16px 34px rgba(32, 46, 58, 0.1);
         }
 
         * { box-sizing: border-box; }
@@ -26,74 +27,81 @@
             margin: 0;
             min-height: 100vh;
             color: var(--ink);
-            background: var(--paper);
+            background: linear-gradient(180deg, #eef8f6 0, var(--paper) 260px);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
         button, input, select { font: inherit; }
-        button { border: 0; cursor: pointer; }
+        button { border: 0; cursor: pointer; transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease; }
+        button:hover { transform: translateY(-1px); }
         input, select {
             width: 100%;
-            min-height: 42px;
-            padding: 0 12px;
-            border: 1px solid #cbd7db;
+            min-height: 46px;
+            padding: 0 14px;
+            border: 1px solid var(--line);
             border-radius: 8px;
             background: var(--white);
             color: var(--ink);
             outline: none;
+            box-shadow: 0 1px 0 rgba(23, 32, 41, 0.02);
         }
         input:focus, select:focus {
             border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(15, 111, 122, 0.13);
+            box-shadow: 0 0 0 4px rgba(12, 142, 160, 0.12);
         }
 
         .app {
             display: grid;
-            grid-template-columns: 84px minmax(0, 1fr) 420px;
+            grid-template-columns: 116px minmax(0, 1fr) 390px;
             min-height: 100vh;
         }
 
         .rail {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             padding: 16px 12px;
-            background: #122128;
+            background: #111923;
             color: var(--white);
         }
 
         .brand {
             display: grid;
             place-items: center;
-            width: 52px;
-            height: 52px;
-            margin: 0 auto 8px;
+            width: 60px;
+            height: 46px;
+            margin: 0 auto 10px;
             border-radius: 8px;
-            background: var(--green);
+            background: linear-gradient(135deg, var(--green), var(--teal));
             font-size: 18px;
             font-weight: 900;
+            box-shadow: 0 10px 22px rgba(25, 166, 106, 0.28);
         }
 
         .nav-btn {
             display: grid;
-            place-items: center;
-            gap: 3px;
-            width: 60px;
+            align-content: center;
+            justify-items: center;
+            gap: 4px;
+            width: 92px;
             min-height: 58px;
             border-radius: 8px;
-            color: #d9e6e4;
+            color: #bed1dc;
             background: transparent;
-            font-size: 18px;
+            font-size: 12px;
+            font-weight: 900;
         }
 
         .nav-btn span {
-            font-size: 10px;
-            font-weight: 800;
+            color: inherit;
+            font-size: 12px;
+            font-weight: 900;
         }
 
         .nav-btn.active, .nav-btn:hover {
             color: var(--white);
             background: rgba(255, 255, 255, 0.12);
+            box-shadow: inset 3px 0 0 var(--green);
         }
 
         .rail-spacer { flex: 1; }
@@ -107,22 +115,28 @@
         .topbar {
             display: grid;
             grid-template-columns: minmax(220px, 1fr) auto auto;
-            gap: 16px;
+            gap: 14px;
             align-items: center;
-            padding: 18px 22px;
+            padding: 20px 24px;
             border-bottom: 1px solid var(--line);
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
         }
 
         .store h1 {
             margin: 0;
-            font-size: 22px;
+            font-size: 24px;
             line-height: 1.1;
         }
 
         .store span, .muted {
             color: var(--muted);
             font-size: 13px;
+        }
+
+        .operator, .clock {
+            border-radius: 8px;
+            box-shadow: 0 8px 22px rgba(32, 46, 58, 0.06);
         }
 
         .operator {
@@ -132,25 +146,23 @@
             min-width: 0;
             padding: 8px 12px;
             border: 1px solid var(--line);
-            border-radius: 8px;
             background: var(--white);
         }
 
         .avatar {
             display: grid;
             place-items: center;
-            width: 34px;
-            height: 34px;
-            flex: 0 0 34px;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            border-radius: 8px;
             color: var(--white);
             background: var(--blue);
             font-weight: 900;
         }
 
         .clock {
-            padding: 10px 12px;
-            border-radius: 8px;
+            padding: 11px 14px;
             color: var(--white);
             background: var(--ink);
             font-weight: 900;
@@ -158,22 +170,22 @@
 
         .scanner {
             display: grid;
-            grid-template-columns: minmax(180px, 1fr) 160px 132px;
+            grid-template-columns: minmax(220px, 1fr) 170px 120px 140px;
             gap: 12px;
-            padding: 16px 22px;
+            padding: 16px 24px;
             border-bottom: 1px solid var(--line);
-            background: #eef5f2;
+            background: rgba(255, 255, 255, 0.7);
         }
 
         .content {
             min-width: 0;
             overflow: auto;
-            padding: 18px 22px 22px;
+            padding: 22px 24px 24px;
         }
 
         .sales-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 290px;
+            grid-template-columns: minmax(0, 1fr) 280px;
             gap: 18px;
             align-items: start;
         }
@@ -183,11 +195,11 @@
             align-items: center;
             justify-content: space-between;
             gap: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         h2, h3 { margin: 0; }
-        h2 { font-size: 18px; }
+        h2 { font-size: 20px; }
         h3 { font-size: 15px; }
 
         .tabs {
@@ -199,41 +211,41 @@
 
         .tab {
             min-width: max-content;
-            padding: 9px 13px;
-            border: 1px solid var(--line);
+            padding: 9px 14px;
+            border: 1px solid transparent;
             border-radius: 999px;
-            color: var(--ink);
-            background: var(--white);
-            font-weight: 800;
+            color: var(--muted);
+            background: #eaf1f4;
+            font-weight: 900;
         }
 
         .tab.active {
             color: var(--white);
-            border-color: var(--green);
-            background: var(--green);
+            background: var(--ink);
+            box-shadow: 0 10px 20px rgba(23, 32, 41, 0.14);
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+            gap: 14px;
         }
 
         .product-card {
             display: grid;
             gap: 10px;
-            min-height: 168px;
-            padding: 12px;
+            min-height: 174px;
+            padding: 14px;
             border: 1px solid var(--line);
             border-radius: 8px;
             background: var(--white);
-            box-shadow: 0 8px 20px rgba(23, 33, 38, 0.05);
+            box-shadow: 0 10px 24px rgba(32, 46, 58, 0.06);
             text-align: left;
         }
 
         .product-card:hover {
-            border-color: rgba(31, 122, 77, 0.52);
-            transform: translateY(-1px);
+            border-color: rgba(25, 166, 106, 0.5);
+            box-shadow: 0 18px 32px rgba(32, 46, 58, 0.1);
         }
 
         .product-art {
@@ -246,25 +258,26 @@
         .product-art b {
             display: grid;
             place-items: center;
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             border-radius: 8px;
-            background: #e6f2ed;
+            color: var(--green-dark);
+            background: #e6f7ef;
             font-size: 20px;
         }
 
         .stock {
-            padding: 4px 7px;
+            padding: 5px 8px;
             border-radius: 999px;
             color: var(--green-dark);
-            background: #dff1e8;
+            background: #dff7ea;
             font-size: 11px;
             font-weight: 900;
         }
 
         .stock.low {
-            color: var(--amber);
-            background: #fff0d4;
+            color: #8a4b00;
+            background: #fff0d6;
         }
 
         .price-row {
@@ -276,20 +289,20 @@
         }
 
         .price {
-            color: var(--green-dark);
-            font-size: 18px;
+            color: var(--ink);
+            font-size: 19px;
             font-weight: 900;
         }
 
         .add {
             display: grid;
             place-items: center;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
             color: var(--white);
-            background: var(--teal);
-            font-size: 19px;
+            background: var(--green);
+            font-size: 20px;
             font-weight: 900;
         }
 
@@ -298,34 +311,38 @@
         .panel, .metric, .data-card {
             border: 1px solid var(--line);
             border-radius: 8px;
-            background: var(--white);
-            box-shadow: 0 8px 20px rgba(23, 33, 38, 0.05);
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 10px 24px rgba(32, 46, 58, 0.06);
         }
 
-        .panel { padding: 14px; }
-        .metric { padding: 14px; }
-        .metric span {
+        .panel { padding: 16px; }
+        .metric { padding: 16px; }
+        .metric:first-child {
+            color: var(--white);
+            border: 0;
+            background: linear-gradient(135deg, var(--green), var(--teal));
+        }
+        .metric:first-child span { color: rgba(255, 255, 255, 0.78); }
+        .metric span, .data-card span {
             color: var(--muted);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 900;
             text-transform: uppercase;
         }
-        .metric strong {
+        .metric strong, .data-card strong {
             display: block;
-            margin-top: 6px;
-            font-size: 24px;
+            margin-top: 7px;
+            font-size: 25px;
         }
 
         .data-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(160px, 1fr));
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 16px;
         }
 
-        .data-card { padding: 14px; }
-        .data-card span { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; }
-        .data-card strong { display: block; margin-top: 8px; font-size: 24px; }
+        .data-card { padding: 16px; }
 
         table {
             width: 100%;
@@ -334,10 +351,11 @@
             border: 1px solid var(--line);
             border-radius: 8px;
             background: var(--white);
+            box-shadow: 0 10px 24px rgba(32, 46, 58, 0.05);
         }
 
         th, td {
-            padding: 12px;
+            padding: 13px;
             border-bottom: 1px solid var(--line);
             text-align: left;
             font-size: 14px;
@@ -345,8 +363,8 @@
 
         th {
             color: var(--muted);
-            background: #f8fbfa;
-            font-size: 12px;
+            background: #f8fbfc;
+            font-size: 11px;
             text-transform: uppercase;
         }
 
@@ -357,8 +375,8 @@
             grid-template-rows: auto auto minmax(0, 1fr) auto;
             min-height: 100vh;
             border-left: 1px solid var(--line);
-            background: var(--white);
-            box-shadow: var(--shadow);
+            background: #fbfdfd;
+            box-shadow: -14px 0 34px rgba(32, 46, 58, 0.08);
         }
 
         .cart-head {
@@ -366,8 +384,9 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            padding: 18px;
+            padding: 20px;
             border-bottom: 1px solid var(--line);
+            background: var(--white);
         }
 
         .customer-box {
@@ -375,10 +394,11 @@
             grid-template-columns: 44px 1fr auto;
             gap: 11px;
             align-items: center;
-            margin: 14px 18px;
-            padding: 12px;
+            margin: 16px;
+            padding: 13px;
+            border: 1px solid #d8f1e5;
             border-radius: 8px;
-            background: #eef5f2;
+            background: #effbf5;
         }
 
         .customer-icon {
@@ -388,7 +408,7 @@
             height: 44px;
             border-radius: 8px;
             color: var(--white);
-            background: var(--teal);
+            background: var(--violet);
             font-weight: 900;
         }
 
@@ -401,8 +421,11 @@
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 12px;
-            padding: 13px 0;
-            border-bottom: 1px solid var(--line);
+            margin-bottom: 10px;
+            padding: 13px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--white);
         }
 
         .cart-item strong, .customer-box strong { display: block; }
@@ -420,9 +443,9 @@
             place-items: center;
             width: 30px;
             height: 30px;
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--ink);
-            background: #eaf0f2;
+            background: #eef3f6;
             font-weight: 900;
         }
 
@@ -434,7 +457,7 @@
         .checkout {
             padding: 18px;
             border-top: 1px solid var(--line);
-            background: #fbfcfc;
+            background: var(--white);
         }
 
         .summary-row {
@@ -448,9 +471,11 @@
         .summary-row.total {
             align-items: center;
             margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid var(--line);
+            padding: 15px;
+            border: 1px solid #d8f1e5;
+            border-radius: 8px;
             color: var(--ink);
+            background: #effbf5;
             font-size: 22px;
             font-weight: 900;
         }
@@ -466,13 +491,14 @@
             min-height: 50px;
             border: 1px solid var(--line);
             border-radius: 8px;
-            background: var(--white);
+            background: #f7fafc;
             font-weight: 900;
         }
 
         .pay-type.active {
-            border-color: var(--green);
-            background: #e6f2ed;
+            color: var(--white);
+            border-color: var(--ink);
+            background: var(--ink);
         }
 
         .actions {
@@ -487,9 +513,13 @@
             font-weight: 900;
         }
 
-        .primary { color: var(--white); background: var(--green); }
+        .primary {
+            color: var(--white);
+            background: var(--green);
+            box-shadow: 0 12px 22px rgba(25, 166, 106, 0.2);
+        }
         .primary:hover { background: var(--green-dark); }
-        .secondary { color: var(--ink); background: #eaf0f2; }
+        .secondary { color: var(--ink); background: #edf3f7; }
         .danger { color: var(--white); background: var(--red); }
         .ghost {
             border: 1px solid var(--line);
@@ -497,7 +527,7 @@
             background: var(--white);
         }
 
-        .charge { grid-column: 1 / -1; min-height: 56px; }
+        .charge { grid-column: 1 / -1; min-height: 58px; font-size: 16px; }
 
         .form-grid {
             display: grid;
@@ -510,16 +540,16 @@
             display: inline-flex;
             align-items: center;
             min-height: 26px;
-            padding: 0 8px;
+            padding: 0 9px;
             border-radius: 999px;
-            background: #e6f2ed;
+            background: #e6f7ef;
             color: var(--green-dark);
             font-size: 12px;
             font-weight: 900;
         }
 
-        .badge.warn { color: var(--amber); background: #fff0d4; }
-        .badge.bad { color: var(--red); background: #fde3e3; }
+        .badge.warn { color: #8a4b00; background: #fff0d6; }
+        .badge.bad { color: var(--red); background: #ffe5e5; }
 
         .receipt {
             display: grid;
@@ -532,13 +562,57 @@
             font-size: 13px;
         }
 
+        .qr-scanner {
+            display: grid;
+            gap: 12px;
+        }
+
+        .qr-camera {
+            position: relative;
+            overflow: hidden;
+            min-height: 280px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #111923;
+        }
+
+        .qr-camera video {
+            width: 100%;
+            min-height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .qr-frame {
+            position: absolute;
+            inset: 48px;
+            border: 3px solid rgba(255, 255, 255, 0.84);
+            border-radius: 8px;
+            box-shadow: 0 0 0 999px rgba(17, 25, 35, 0.32);
+            pointer-events: none;
+        }
+
+        .qr-status {
+            padding: 11px 12px;
+            border-radius: 8px;
+            color: var(--muted);
+            background: #f4f8fa;
+            font-size: 13px;
+        }
+
+        .qr-manual {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 10px;
+        }
+
         .modal {
             position: fixed;
             inset: 0;
             display: none;
             place-items: center;
             padding: 18px;
-            background: rgba(18, 33, 40, 0.42);
+            background: rgba(17, 25, 35, 0.46);
             z-index: 20;
         }
 
@@ -585,7 +659,7 @@
         .toast.show { display: block; }
 
         @media (max-width: 1220px) {
-            .app { grid-template-columns: 76px minmax(0, 1fr); }
+            .app { grid-template-columns: 104px minmax(0, 1fr); }
             .cart { grid-column: 1 / -1; min-height: auto; border-left: 0; border-top: 1px solid var(--line); }
             .data-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
         }
@@ -599,6 +673,7 @@
                 flex-direction: row;
                 overflow: auto;
             }
+            .nav-btn { width: 76px; }
             .rail-spacer { display: none; }
             .content, .topbar, .scanner { padding-left: 14px; padding-right: 14px; }
         }
@@ -614,13 +689,13 @@
     <div class="app">
         <nav class="rail" aria-label="POS modules">
             <div class="brand">FS</div>
-            <button class="nav-btn active" data-view="sales" title="Sales">#<span>Sales</span></button>
-            <button class="nav-btn" data-view="inventory" title="Inventory">$<span>Stock</span></button>
-            <button class="nav-btn" data-view="customers" title="Customers">@<span>People</span></button>
-            <button class="nav-btn" data-view="receipts" title="Receipts">=<span>Receipts</span></button>
-            <button class="nav-btn" data-view="reports" title="Reports">%<span>Reports</span></button>
+            <button class="nav-btn active" data-view="sales" title="Sales">POS<span>Sales</span></button>
+            <button class="nav-btn" data-view="inventory" title="Inventory">INV<span>Stock</span></button>
+            <button class="nav-btn" data-view="customers" title="Customers">CRM<span>People</span></button>
+            <button class="nav-btn" data-view="receipts" title="Receipts">REC<span>Receipts</span></button>
+            <button class="nav-btn" data-view="reports" title="Reports">RPT<span>Reports</span></button>
             <div class="rail-spacer"></div>
-            <button class="nav-btn" data-view="settings" title="Settings">*</button>
+            <button class="nav-btn" data-view="settings" title="Settings">SET</button>
         </nav>
 
         <main class="main">
@@ -642,6 +717,7 @@
             <section class="scanner" aria-label="Barcode and product search">
                 <input id="searchInput" type="search" placeholder="Scan barcode or search product name">
                 <select id="departmentSelect" aria-label="Department"></select>
+                <button class="secondary" id="qrScan">QR Scan</button>
                 <button class="primary" id="quickAdd">Quick Add</button>
             </section>
 
@@ -725,6 +801,7 @@
 
         const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
         const storageKey = "flowsync-pos-state-v1";
+        const apiBase = `${location.origin}/api`;
         const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
         const state = saved || {
             products: seedProducts,
@@ -749,10 +826,60 @@
         const modalFoot = document.getElementById("modalFoot");
         const searchInput = document.getElementById("searchInput");
         const departmentSelect = document.getElementById("departmentSelect");
+        let qrStream = null;
+        let qrScanTimer = null;
+        let backendReady = false;
+        let saveTimer = null;
 
         function save() {
             state.cart = Array.from(cart.entries());
             localStorage.setItem(storageKey, JSON.stringify(state));
+            if (!backendReady) return;
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(async () => {
+                try {
+                    await fetch(`${apiBase}/state`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(state)
+                    });
+                } catch (error) {
+                    backendReady = false;
+                    showToast("Backend offline. Saving in this browser for now.");
+                }
+            }, 250);
+        }
+
+        async function loadBackendState() {
+            try {
+                const response = await fetch(`${apiBase}/state`);
+                if (!response.ok) throw new Error("State request failed");
+                const serverState = await response.json();
+                Object.assign(state, serverState);
+                cart.clear();
+                (state.cart || []).forEach(([id, quantity]) => cart.set(Number(id), quantity));
+                renderShell(false);
+                backendReady = true;
+                showToast("Backend connected. Data is stored in SQLite.");
+            } catch (error) {
+                backendReady = false;
+                showToast("Backend not running. Using browser storage.");
+            }
+        }
+
+        async function resetBackendState() {
+            if (!backendReady) {
+                localStorage.removeItem(storageKey);
+                location.reload();
+                return;
+            }
+            const response = await fetch(`${apiBase}/reset`, { method: "POST" });
+            const serverState = await response.json();
+            Object.assign(state, serverState);
+            cart.clear();
+            (state.cart || []).forEach(([id, quantity]) => cart.set(Number(id), quantity));
+            localStorage.setItem(storageKey, JSON.stringify(state));
+            renderShell(false);
         }
 
         function departments() {
@@ -797,10 +924,22 @@
         }
 
         function closeModal() {
+            stopQrScanner();
             modal.classList.remove("open");
         }
 
-        function renderShell() {
+        function stopQrScanner() {
+            if (qrScanTimer) {
+                clearInterval(qrScanTimer);
+                qrScanTimer = null;
+            }
+            if (qrStream) {
+                qrStream.getTracks().forEach((track) => track.stop());
+                qrStream = null;
+            }
+        }
+
+        function renderShell(shouldSave = true) {
             document.querySelectorAll(".nav-btn").forEach((button) => {
                 button.classList.toggle("active", button.dataset.view === state.activeView);
             });
@@ -811,7 +950,7 @@
                 : "Register 03 - Register closed";
             renderCart();
             renderView();
-            save();
+            if (shouldSave) save();
         }
 
         function renderView() {
@@ -1028,7 +1167,7 @@
                 </div>
                 <div class="panel">
                     <h3>System Coverage</h3>
-                    <p class="muted">This local POS includes sales checkout, product inventory, customer loyalty, held sales, receipts, refunds, shift reporting, tax settings, and browser persistence with localStorage.</p>
+                    <p class="muted">This POS includes sales checkout, product inventory, customer loyalty, held sales, receipts, refunds, shift reporting, tax settings, and persistent backend storage with SQLite. If the backend is offline, it temporarily falls back to browser storage.</p>
                 </div>
             `;
             document.getElementById("registerStatus").value = state.registerOpen ? "open" : "closed";
@@ -1075,6 +1214,83 @@
             cart.set(Number(id), (cart.get(Number(id)) || 0) + 1);
             renderCart();
             save();
+        }
+
+        function productFromScan(code) {
+            const raw = String(code || "").trim();
+            if (!raw) return null;
+            const normalized = raw.toLowerCase();
+            let sku = raw;
+
+            try {
+                const url = new URL(raw);
+                sku = url.searchParams.get("sku") || url.searchParams.get("code") || raw;
+            } catch (error) {
+                const skuMatch = raw.match(/sku[:=\s-]*([a-z0-9-]+)/i);
+                if (skuMatch) sku = skuMatch[1];
+            }
+
+            return state.products.find((product) => {
+                const productText = `${product.sku} ${product.name} ${product.id}`.toLowerCase();
+                return product.sku === sku || String(product.id) === sku || productText.includes(normalized);
+            });
+        }
+
+        function useScannedCode(code) {
+            const product = productFromScan(code);
+            if (!product) {
+                showToast(`No product found for ${code}`);
+                return;
+            }
+            addToCart(product.id);
+            searchInput.value = product.sku;
+            closeModal();
+            showToast(`${product.name} added from QR scan.`);
+        }
+
+        async function openQrScanner() {
+            openModal("QR Product Scanner", `
+                <div class="qr-scanner">
+                    <div class="qr-camera">
+                        <video id="qrVideo" autoplay muted playsinline></video>
+                        <div class="qr-frame"></div>
+                    </div>
+                    <div class="qr-status" id="qrStatus">Starting camera. You can also enter a product SKU manually.</div>
+                    <div class="qr-manual">
+                        <input id="qrManualCode" placeholder="Enter SKU, QR text, or product code">
+                        <button class="primary" id="qrManualAdd">Add</button>
+                    </div>
+                </div>
+            `, `<button class="secondary" id="doneModal">Close Scanner</button>`);
+
+            const status = document.getElementById("qrStatus");
+            const video = document.getElementById("qrVideo");
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                status.textContent = "Camera access is not available in this browser. Use manual SKU entry below.";
+                return;
+            }
+            if (!("BarcodeDetector" in window)) {
+                status.textContent = "This browser does not support live QR detection. Use manual SKU entry below.";
+                return;
+            }
+
+            try {
+                qrStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = qrStream;
+                const detector = new BarcodeDetector({ formats: ["qr_code", "code_128", "ean_13", "ean_8", "upc_a", "upc_e"] });
+                status.textContent = "Point the camera at a product QR code or barcode.";
+                qrScanTimer = setInterval(async () => {
+                    if (!video.videoWidth) return;
+                    try {
+                        const codes = await detector.detect(video);
+                        if (codes.length) useScannedCode(codes[0].rawValue);
+                    } catch (error) {
+                        status.textContent = "Scanning paused. Try better lighting or use manual entry.";
+                    }
+                }, 650);
+            } catch (error) {
+                status.textContent = "Camera permission was blocked or unavailable. Use manual SKU entry below.";
+            }
         }
 
         function chargeSale() {
@@ -1270,6 +1486,11 @@
                 const product = state.products.find((item) => `${item.sku} ${item.name}`.toLowerCase().includes(query)) || state.products[0];
                 addToCart(product.id);
             }
+            if (target.id === "qrScan") openQrScanner();
+            if (target.id === "qrManualAdd") {
+                const code = document.getElementById("qrManualCode").value;
+                useScannedCode(code);
+            }
             if (target.id === "voidSale") {
                 cart.clear();
                 state.customerId = 1;
@@ -1357,8 +1578,7 @@
                 showToast("Settings saved.");
             }
             if (target.id === "resetDemo") {
-                localStorage.removeItem(storageKey);
-                location.reload();
+                resetBackendState();
             }
             if (target.id === "closeModal" || target.id === "doneModal") closeModal();
         });
@@ -1383,7 +1603,8 @@
 
         updateClock();
         setInterval(updateClock, 30000);
-        renderShell();
+        renderShell(false);
+        loadBackendState();
     </script>
 </body>
 </html>
