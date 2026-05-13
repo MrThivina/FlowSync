@@ -860,7 +860,7 @@
                 (state.cart || []).forEach(([id, quantity]) => cart.set(Number(id), quantity));
                 renderShell(false);
                 backendReady = true;
-                showToast("Backend connected. Data is stored in SQLite.");
+                showToast("Backend connected. Data is stored on the server.");
             } catch (error) {
                 backendReady = false;
                 showToast("Backend not running. Using browser storage.");
@@ -1167,7 +1167,7 @@
                 </div>
                 <div class="panel">
                     <h3>System Coverage</h3>
-                    <p class="muted">This POS includes sales checkout, product inventory, customer loyalty, held sales, receipts, refunds, shift reporting, tax settings, and persistent backend storage with SQLite. If the backend is offline, it temporarily falls back to browser storage.</p>
+                    <p class="muted">This POS includes sales checkout, product inventory, customer loyalty, held sales, receipts, refunds, shift reporting, tax settings, and persistent backend storage. If the backend is offline, it temporarily falls back to browser storage.</p>
                 </div>
             `;
             document.getElementById("registerStatus").value = state.registerOpen ? "open" : "closed";
