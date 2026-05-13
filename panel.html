@@ -8,57 +8,56 @@
         :root {
             --ink: #172126;
             --muted: #65737b;
-            --line: #dce4e7;
-            --paper: #f5f8f7;
+            --line: #dbe5e7;
+            --paper: #f4f8f6;
             --white: #ffffff;
-            --green: #1f7a4d;
-            --green-dark: #145d39;
+            --green: #1e7a4d;
+            --green-dark: #125a37;
             --teal: #0f6f7a;
-            --amber: #b86b00;
-            --red: #b33737;
-            --blue: #275da8;
-            --shadow: 0 14px 32px rgba(23, 33, 38, 0.1);
+            --blue: #285fa8;
+            --amber: #b36a00;
+            --red: #b73535;
+            --shadow: 0 14px 34px rgba(23, 33, 38, 0.12);
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             min-height: 100vh;
             color: var(--ink);
-            background:
-                linear-gradient(90deg, rgba(31, 122, 77, 0.08) 0 1px, transparent 1px 100%),
-                linear-gradient(180deg, rgba(15, 111, 122, 0.06) 0 1px, transparent 1px 100%),
-                var(--paper);
-            background-size: 32px 32px;
+            background: var(--paper);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
-        button,
-        input,
-        select {
-            font: inherit;
+        button, input, select { font: inherit; }
+        button { border: 0; cursor: pointer; }
+        input, select {
+            width: 100%;
+            min-height: 42px;
+            padding: 0 12px;
+            border: 1px solid #cbd7db;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--ink);
+            outline: none;
         }
-
-        button {
-            border: 0;
-            cursor: pointer;
+        input:focus, select:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(15, 111, 122, 0.13);
         }
 
         .app {
             display: grid;
-            grid-template-columns: 76px minmax(0, 1fr) 420px;
+            grid-template-columns: 84px minmax(0, 1fr) 420px;
             min-height: 100vh;
         }
 
         .rail {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            padding: 18px 12px;
+            gap: 10px;
+            padding: 16px 12px;
             background: #122128;
             color: var(--white);
         }
@@ -66,40 +65,42 @@
         .brand {
             display: grid;
             place-items: center;
-            width: 44px;
-            height: 44px;
-            margin-bottom: 8px;
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 8px;
             border-radius: 8px;
             background: var(--green);
+            font-size: 18px;
             font-weight: 900;
-            letter-spacing: 0;
         }
 
-        .rail button {
+        .nav-btn {
             display: grid;
             place-items: center;
-            width: 48px;
-            height: 48px;
+            gap: 3px;
+            width: 60px;
+            min-height: 58px;
             border-radius: 8px;
-            color: #d8e6e4;
+            color: #d9e6e4;
             background: transparent;
-            font-size: 21px;
-            transition: 0.18s ease;
+            font-size: 18px;
         }
 
-        .rail button.active,
-        .rail button:hover {
+        .nav-btn span {
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .nav-btn.active, .nav-btn:hover {
             color: var(--white);
             background: rgba(255, 255, 255, 0.12);
         }
 
-        .rail .spacer {
-            flex: 1;
-        }
+        .rail-spacer { flex: 1; }
 
         .main {
             display: grid;
-            grid-template-rows: auto auto 1fr;
+            grid-template-rows: auto auto minmax(0, 1fr);
             min-width: 0;
         }
 
@@ -108,10 +109,9 @@
             grid-template-columns: minmax(220px, 1fr) auto auto;
             gap: 16px;
             align-items: center;
-            padding: 18px 22px 14px;
-            background: rgba(255, 255, 255, 0.88);
+            padding: 18px 22px;
             border-bottom: 1px solid var(--line);
-            backdrop-filter: blur(14px);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         .store h1 {
@@ -120,9 +120,7 @@
             line-height: 1.1;
         }
 
-        .store span {
-            display: block;
-            margin-top: 4px;
+        .store span, .muted {
             color: var(--muted);
             font-size: 13px;
         }
@@ -147,17 +145,7 @@
             border-radius: 50%;
             color: var(--white);
             background: var(--blue);
-            font-weight: 800;
-        }
-
-        .operator strong,
-        .operator small {
-            display: block;
-            white-space: nowrap;
-        }
-
-        .operator small {
-            color: var(--muted);
+            font-weight: 900;
         }
 
         .clock {
@@ -165,76 +153,29 @@
             border-radius: 8px;
             color: var(--white);
             background: var(--ink);
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .scanner {
             display: grid;
-            grid-template-columns: minmax(180px, 1fr) 150px 132px;
+            grid-template-columns: minmax(180px, 1fr) 160px 132px;
             gap: 12px;
             padding: 16px 22px;
             border-bottom: 1px solid var(--line);
             background: #eef5f2;
         }
 
-        .field {
-            position: relative;
-        }
-
-        .field span {
-            position: absolute;
-            top: 50%;
-            left: 13px;
-            transform: translateY(-50%);
-            color: var(--muted);
-            font-size: 18px;
-        }
-
-        input,
-        select {
-            width: 100%;
-            min-height: 46px;
-            padding: 0 12px;
-            border: 1px solid #cbd7db;
-            border-radius: 8px;
-            color: var(--ink);
-            background: var(--white);
-            outline: none;
-        }
-
-        .field input {
-            padding-left: 42px;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(15, 111, 122, 0.13);
-        }
-
-        .primary {
-            min-height: 46px;
-            border-radius: 8px;
-            color: var(--white);
-            background: var(--green);
-            font-weight: 800;
-        }
-
-        .primary:hover {
-            background: var(--green-dark);
-        }
-
-        .workspace {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 280px;
-            gap: 18px;
-            min-height: 0;
-            padding: 18px 22px 22px;
-            overflow: auto;
-        }
-
-        .catalog {
+        .content {
             min-width: 0;
+            overflow: auto;
+            padding: 18px 22px 22px;
+        }
+
+        .sales-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 290px;
+            gap: 18px;
+            align-items: start;
         }
 
         .section-head {
@@ -245,10 +186,9 @@
             margin-bottom: 12px;
         }
 
-        .section-head h2 {
-            margin: 0;
-            font-size: 17px;
-        }
+        h2, h3 { margin: 0; }
+        h2 { font-size: 18px; }
+        h3 { font-size: 15px; }
 
         .tabs {
             display: flex;
@@ -264,7 +204,7 @@
             border-radius: 999px;
             color: var(--ink);
             background: var(--white);
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .tab.active {
@@ -279,10 +219,10 @@
             gap: 12px;
         }
 
-        .product {
+        .product-card {
             display: grid;
             gap: 10px;
-            min-height: 166px;
+            min-height: 168px;
             padding: 12px;
             border: 1px solid var(--line);
             border-radius: 8px;
@@ -291,15 +231,15 @@
             text-align: left;
         }
 
-        .product:hover {
-            border-color: rgba(31, 122, 77, 0.5);
+        .product-card:hover {
+            border-color: rgba(31, 122, 77, 0.52);
             transform: translateY(-1px);
         }
 
         .product-art {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: flex-start;
             min-height: 54px;
         }
 
@@ -310,38 +250,27 @@
             height: 52px;
             border-radius: 8px;
             background: #e6f2ed;
-            font-size: 27px;
+            font-size: 20px;
         }
 
         .stock {
-            align-self: start;
             padding: 4px 7px;
             border-radius: 999px;
             color: var(--green-dark);
             background: #dff1e8;
             font-size: 11px;
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .stock.low {
             color: var(--amber);
-            background: #fff1d6;
-        }
-
-        .product strong {
-            min-height: 38px;
-            font-size: 14px;
-            line-height: 1.25;
-        }
-
-        .product small {
-            color: var(--muted);
+            background: #fff0d4;
         }
 
         .price-row {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: end;
             gap: 8px;
             margin-top: auto;
         }
@@ -360,80 +289,68 @@
             border-radius: 8px;
             color: var(--white);
             background: var(--teal);
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 900;
         }
 
-        .insights {
-            display: grid;
-            align-content: start;
-            gap: 12px;
-        }
+        .stack { display: grid; gap: 12px; }
 
-        .metric,
-        .panel {
+        .panel, .metric, .data-card {
             border: 1px solid var(--line);
             border-radius: 8px;
             background: var(--white);
             box-shadow: 0 8px 20px rgba(23, 33, 38, 0.05);
         }
 
-        .metric {
-            padding: 14px;
-        }
-
+        .panel { padding: 14px; }
+        .metric { padding: 14px; }
         .metric span {
             color: var(--muted);
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
         }
-
         .metric strong {
             display: block;
             margin-top: 6px;
             font-size: 24px;
         }
 
-        .panel {
-            padding: 14px;
-        }
-
-        .panel h3 {
-            margin: 0 0 12px;
-            font-size: 15px;
-        }
-
-        .alert {
+        .data-grid {
             display: grid;
-            grid-template-columns: 38px 1fr;
-            gap: 10px;
-            align-items: center;
-            padding: 10px 0;
-            border-top: 1px solid var(--line);
+            grid-template-columns: repeat(4, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .alert:first-of-type {
-            border-top: 0;
-        }
+        .data-card { padding: 14px; }
+        .data-card span { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; }
+        .data-card strong { display: block; margin-top: 8px; font-size: 24px; }
 
-        .alert b {
-            display: grid;
-            place-items: center;
-            width: 38px;
-            height: 38px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border: 1px solid var(--line);
             border-radius: 8px;
-            background: #f5efe0;
+            background: var(--white);
         }
 
-        .alert strong,
-        .alert small {
-            display: block;
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            font-size: 14px;
         }
 
-        .alert small {
+        th {
             color: var(--muted);
+            background: #f8fbfa;
+            font-size: 12px;
+            text-transform: uppercase;
         }
+
+        tr:last-child td { border-bottom: 0; }
 
         .cart {
             display: grid;
@@ -445,16 +362,15 @@
         }
 
         .cart-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
             padding: 18px;
             border-bottom: 1px solid var(--line);
         }
 
-        .cart-head h2 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .customer {
+        .customer-box {
             display: grid;
             grid-template-columns: 44px 1fr auto;
             gap: 11px;
@@ -473,25 +389,7 @@
             border-radius: 8px;
             color: var(--white);
             background: var(--teal);
-            font-size: 20px;
-        }
-
-        .customer strong,
-        .customer span {
-            display: block;
-        }
-
-        .customer span {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .link-button {
-            padding: 8px 10px;
-            border-radius: 8px;
-            color: var(--teal);
-            background: var(--white);
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .cart-list {
@@ -507,29 +405,23 @@
             border-bottom: 1px solid var(--line);
         }
 
-        .cart-item strong {
-            display: block;
-            font-size: 14px;
-        }
-
-        .cart-item small {
-            color: var(--muted);
-        }
+        .cart-item strong, .customer-box strong { display: block; }
+        .cart-item small, .customer-box span { color: var(--muted); font-size: 12px; }
 
         .qty {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
             gap: 8px;
             margin-top: 8px;
         }
 
-        .qty button {
+        .qty button, .icon-btn {
             display: grid;
             place-items: center;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 6px;
+            color: var(--ink);
             background: #eaf0f2;
             font-weight: 900;
         }
@@ -543,13 +435,6 @@
             padding: 18px;
             border-top: 1px solid var(--line);
             background: #fbfcfc;
-        }
-
-        .coupon {
-            display: grid;
-            grid-template-columns: 1fr 88px;
-            gap: 8px;
-            margin-bottom: 14px;
         }
 
         .summary-row {
@@ -578,11 +463,11 @@
         }
 
         .pay-type {
-            min-height: 52px;
+            min-height: 50px;
             border: 1px solid var(--line);
             border-radius: 8px;
             background: var(--white);
-            font-size: 20px;
+            font-weight: 900;
         }
 
         .pay-type.active {
@@ -590,100 +475,138 @@
             background: #e6f2ed;
         }
 
-        .checkout-actions {
+        .actions {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
-        .secondary,
-        .danger {
-            min-height: 48px;
+        .primary, .secondary, .danger, .ghost {
+            min-height: 44px;
             border-radius: 8px;
             font-weight: 900;
         }
 
-        .secondary {
-            color: var(--ink);
-            background: #eaf0f2;
+        .primary { color: var(--white); background: var(--green); }
+        .primary:hover { background: var(--green-dark); }
+        .secondary { color: var(--ink); background: #eaf0f2; }
+        .danger { color: var(--white); background: var(--red); }
+        .ghost {
+            border: 1px solid var(--line);
+            color: var(--teal);
+            background: var(--white);
         }
 
-        .danger {
+        .charge { grid-column: 1 / -1; min-height: 56px; }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            min-height: 26px;
+            padding: 0 8px;
+            border-radius: 999px;
+            background: #e6f2ed;
+            color: var(--green-dark);
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .badge.warn { color: var(--amber); background: #fff0d4; }
+        .badge.bad { color: var(--red); background: #fde3e3; }
+
+        .receipt {
+            display: grid;
+            gap: 8px;
+            padding: 14px;
+            border: 1px dashed #a8b7bb;
+            border-radius: 8px;
+            background: #fcfefd;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 13px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            place-items: center;
+            padding: 18px;
+            background: rgba(18, 33, 40, 0.42);
+            z-index: 20;
+        }
+
+        .modal.open { display: grid; }
+
+        .modal-box {
+            width: min(760px, 100%);
+            max-height: 88vh;
+            overflow: auto;
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-head, .modal-body, .modal-foot { padding: 16px; }
+        .modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line);
+        }
+        .modal-foot {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid var(--line);
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 18px;
+            transform: translateX(-50%);
+            display: none;
+            max-width: min(520px, calc(100% - 32px));
+            padding: 12px 14px;
+            border-radius: 8px;
             color: var(--white);
-            background: var(--red);
+            background: var(--ink);
+            box-shadow: var(--shadow);
+            z-index: 30;
         }
 
-        .checkout-actions .primary {
-            grid-column: 1 / -1;
-            min-height: 56px;
-            font-size: 16px;
-        }
+        .toast.show { display: block; }
 
-        @media (max-width: 1180px) {
-            .app {
-                grid-template-columns: 68px minmax(0, 1fr);
-            }
-
-            .cart {
-                grid-column: 1 / -1;
-                min-height: auto;
-                border-left: 0;
-                border-top: 1px solid var(--line);
-            }
+        @media (max-width: 1220px) {
+            .app { grid-template-columns: 76px minmax(0, 1fr); }
+            .cart { grid-column: 1 / -1; min-height: auto; border-left: 0; border-top: 1px solid var(--line); }
+            .data-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
         }
 
         @media (max-width: 860px) {
-            .app,
-            .workspace,
-            .topbar,
-            .scanner {
-                grid-template-columns: 1fr;
-            }
-
+            .app, .sales-layout, .topbar, .scanner, .form-grid { grid-template-columns: 1fr; }
             .rail {
                 position: sticky;
                 top: 0;
-                z-index: 5;
+                z-index: 10;
                 flex-direction: row;
-                min-width: 0;
                 overflow: auto;
             }
-
-            .rail .spacer {
-                display: none;
-            }
-
-            .workspace {
-                padding: 14px;
-            }
-
-            .topbar,
-            .scanner {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
-
-            .payment-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .rail-spacer { display: none; }
+            .content, .topbar, .scanner { padding-left: 14px; padding-right: 14px; }
         }
 
-        @media (max-width: 520px) {
-            .product-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .product {
-                min-height: 156px;
-            }
-
-            .customer {
-                grid-template-columns: 40px 1fr;
-            }
-
-            .customer .link-button {
-                grid-column: 1 / -1;
-            }
+        @media (max-width: 540px) {
+            .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .data-grid, .payment-grid { grid-template-columns: repeat(2, 1fr); }
+            th, td { padding: 9px; }
         }
     </style>
 </head>
@@ -691,290 +614,764 @@
     <div class="app">
         <nav class="rail" aria-label="POS modules">
             <div class="brand">FS</div>
-            <button class="active" title="Sales">#</button>
-            <button title="Products">$</button>
-            <button title="Customers">@</button>
-            <button title="Reports">%</button>
-            <button title="Inventory">!</button>
-            <div class="spacer"></div>
-            <button title="Settings">*</button>
+            <button class="nav-btn active" data-view="sales" title="Sales">#<span>Sales</span></button>
+            <button class="nav-btn" data-view="inventory" title="Inventory">$<span>Stock</span></button>
+            <button class="nav-btn" data-view="customers" title="Customers">@<span>People</span></button>
+            <button class="nav-btn" data-view="receipts" title="Receipts">=<span>Receipts</span></button>
+            <button class="nav-btn" data-view="reports" title="Reports">%<span>Reports</span></button>
+            <div class="rail-spacer"></div>
+            <button class="nav-btn" data-view="settings" title="Settings">*</button>
         </nav>
 
         <main class="main">
             <header class="topbar">
                 <div class="store">
                     <h1>FreshMart Supermarket POS</h1>
-                    <span>Register 03 - Main checkout - Shift open</span>
+                    <span id="statusLine">Register 03 - Main checkout - Shift open</span>
                 </div>
                 <div class="operator">
                     <div class="avatar">TK</div>
                     <div>
                         <strong>Thivindu K.</strong>
-                        <small>Cashier ID 1042</small>
+                        <span class="muted">Cashier ID 1042</span>
                     </div>
                 </div>
-                <div class="clock" id="clock">20:45</div>
+                <div class="clock" id="clock">00:00</div>
             </header>
 
             <section class="scanner" aria-label="Barcode and product search">
-                <label class="field">
-                    <span>| | |</span>
-                    <input id="searchInput" type="search" placeholder="Scan barcode or search product name">
-                </label>
-                <select id="departmentSelect" aria-label="Department">
-                    <option value="All">All departments</option>
-                    <option value="Produce">Produce</option>
-                    <option value="Dairy">Dairy</option>
-                    <option value="Bakery">Bakery</option>
-                    <option value="Grocery">Grocery</option>
-                    <option value="Household">Household</option>
-                </select>
+                <input id="searchInput" type="search" placeholder="Scan barcode or search product name">
+                <select id="departmentSelect" aria-label="Department"></select>
                 <button class="primary" id="quickAdd">Quick Add</button>
             </section>
 
-            <section class="workspace">
-                <div class="catalog">
-                    <div class="section-head">
-                        <h2>Product Catalog</h2>
-                        <div class="tabs" id="tabs" aria-label="Department filters"></div>
-                    </div>
-                    <div class="product-grid" id="productGrid"></div>
-                </div>
-
-                <aside class="insights" aria-label="Store operations">
-                    <div class="metric">
-                        <span>Today sales</span>
-                        <strong>$8,426.20</strong>
-                    </div>
-                    <div class="metric">
-                        <span>Transactions</span>
-                        <strong>187</strong>
-                    </div>
-                    <div class="panel">
-                        <h3>Inventory Alerts</h3>
-                        <div class="alert">
-                            <b>!</b>
-                            <div>
-                                <strong>Whole Milk 1L</strong>
-                                <small>Only 9 units left</small>
-                            </div>
-                        </div>
-                        <div class="alert">
-                            <b>!</b>
-                            <div>
-                                <strong>Basmati Rice 5kg</strong>
-                                <small>Reorder by tomorrow</small>
-                            </div>
-                        </div>
-                        <div class="alert">
-                            <b>%</b>
-                            <div>
-                                <strong>Banana Bundle</strong>
-                                <small>Promo ends tonight</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <h3>Queue Status</h3>
-                        <div class="summary-row"><span>Open lanes</span><strong>6</strong></div>
-                        <div class="summary-row"><span>Avg. wait</span><strong>3 min</strong></div>
-                        <div class="summary-row"><span>Returns pending</span><strong>4</strong></div>
-                    </div>
-                </aside>
-            </section>
+            <section class="content" id="content"></section>
         </main>
 
         <aside class="cart" aria-label="Current sale cart">
             <div class="cart-head">
                 <h2>Current Sale</h2>
+                <button class="ghost" id="recallSale">Recall</button>
             </div>
-
-            <div class="customer">
+            <div class="customer-box">
                 <div class="customer-icon">@</div>
                 <div>
-                    <strong>Walk-in Customer</strong>
-                    <span>Loyalty points can be added</span>
+                    <strong id="customerName">Walk-in Customer</strong>
+                    <span id="customerMeta">No loyalty profile attached</span>
                 </div>
-                <button class="link-button">Attach</button>
+                <button class="ghost" id="attachCustomer">Attach</button>
             </div>
-
             <div class="cart-list" id="cartList"></div>
-
             <div class="checkout">
-                <div class="coupon">
-                    <input type="text" placeholder="Coupon code">
-                    <button class="secondary">Apply</button>
-                </div>
-
                 <div class="summary-row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
                 <div class="summary-row"><span>Discount</span><strong id="discount">-$0.00</strong></div>
                 <div class="summary-row"><span>Tax 8%</span><strong id="tax">$0.00</strong></div>
                 <div class="summary-row total"><span>Total</span><strong id="total">$0.00</strong></div>
-
-                <div class="payment-grid" aria-label="Payment method">
-                    <button class="pay-type active" title="Card">[$]</button>
-                    <button class="pay-type" title="Cash">$$</button>
-                    <button class="pay-type" title="Mobile">[]</button>
-                    <button class="pay-type" title="Split">+/-</button>
+                <div class="payment-grid" id="paymentGrid">
+                    <button class="pay-type active" data-payment="Card">Card</button>
+                    <button class="pay-type" data-payment="Cash">Cash</button>
+                    <button class="pay-type" data-payment="Mobile">Mobile</button>
+                    <button class="pay-type" data-payment="Split">Split</button>
                 </div>
-
-                <div class="checkout-actions">
+                <div class="actions">
                     <button class="danger" id="voidSale">Void</button>
-                    <button class="secondary">Hold</button>
-                    <button class="primary">Charge Customer</button>
+                    <button class="secondary" id="holdSale">Hold</button>
+                    <button class="primary charge" id="chargeSale">Charge Customer</button>
                 </div>
             </div>
         </aside>
     </div>
 
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h2 id="modalTitle">Dialog</h2>
+                <button class="icon-btn" id="closeModal">x</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-foot" id="modalFoot"></div>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+
     <script>
-        const products = [
-            { id: 1, name: "Organic Banana Bundle", department: "Produce", price: 2.99, unit: "per bunch", stock: 28, icon: "BN" },
-            { id: 2, name: "Red Apple Pack", department: "Produce", price: 4.49, unit: "1 kg bag", stock: 34, icon: "AP" },
-            { id: 3, name: "Whole Milk 1L", department: "Dairy", price: 1.89, unit: "bottle", stock: 9, icon: "MK" },
-            { id: 4, name: "Greek Yogurt Cup", department: "Dairy", price: 1.25, unit: "each", stock: 22, icon: "YG" },
-            { id: 5, name: "Sourdough Loaf", department: "Bakery", price: 3.75, unit: "loaf", stock: 17, icon: "BR" },
-            { id: 6, name: "Butter Croissant", department: "Bakery", price: 1.65, unit: "each", stock: 15, icon: "CR" },
-            { id: 7, name: "Basmati Rice 5kg", department: "Grocery", price: 12.8, unit: "bag", stock: 8, icon: "RC" },
-            { id: 8, name: "Canned Tuna", department: "Grocery", price: 2.4, unit: "can", stock: 44, icon: "TN" },
-            { id: 9, name: "Laundry Detergent", department: "Household", price: 8.99, unit: "2L pack", stock: 13, icon: "LD" },
-            { id: 10, name: "Paper Towel 6 Roll", department: "Household", price: 6.5, unit: "pack", stock: 20, icon: "PT" }
+        const seedProducts = [
+            { id: 1, sku: "1001", name: "Organic Banana Bundle", department: "Produce", price: 2.99, cost: 1.35, unit: "bunch", stock: 28, reorder: 12, icon: "BN" },
+            { id: 2, sku: "1002", name: "Red Apple Pack", department: "Produce", price: 4.49, cost: 2.1, unit: "1 kg", stock: 34, reorder: 10, icon: "AP" },
+            { id: 3, sku: "2101", name: "Whole Milk 1L", department: "Dairy", price: 1.89, cost: 0.96, unit: "bottle", stock: 9, reorder: 16, icon: "MK" },
+            { id: 4, sku: "2102", name: "Greek Yogurt Cup", department: "Dairy", price: 1.25, cost: 0.58, unit: "cup", stock: 22, reorder: 14, icon: "YG" },
+            { id: 5, sku: "3201", name: "Sourdough Loaf", department: "Bakery", price: 3.75, cost: 1.7, unit: "loaf", stock: 17, reorder: 8, icon: "BR" },
+            { id: 6, sku: "3202", name: "Butter Croissant", department: "Bakery", price: 1.65, cost: 0.72, unit: "each", stock: 15, reorder: 8, icon: "CR" },
+            { id: 7, sku: "4401", name: "Basmati Rice 5kg", department: "Grocery", price: 12.8, cost: 8.6, unit: "bag", stock: 8, reorder: 10, icon: "RC" },
+            { id: 8, sku: "4402", name: "Canned Tuna", department: "Grocery", price: 2.4, cost: 1.2, unit: "can", stock: 44, reorder: 18, icon: "TN" },
+            { id: 9, sku: "5501", name: "Laundry Detergent", department: "Household", price: 8.99, cost: 5.1, unit: "2L", stock: 13, reorder: 10, icon: "LD" },
+            { id: 10, sku: "5502", name: "Paper Towel 6 Roll", department: "Household", price: 6.5, cost: 3.8, unit: "pack", stock: 20, reorder: 12, icon: "PT" },
+            { id: 11, sku: "6601", name: "Chicken Breast 1kg", department: "Meat", price: 7.95, cost: 4.4, unit: "pack", stock: 19, reorder: 9, icon: "CH" },
+            { id: 12, sku: "7701", name: "Orange Juice 1L", department: "Beverage", price: 3.2, cost: 1.65, unit: "carton", stock: 26, reorder: 12, icon: "OJ" }
         ];
 
-        const cart = new Map([
-            [1, 2],
-            [3, 1],
-            [5, 1],
-            [8, 3]
-        ]);
+        const seedCustomers = [
+            { id: 1, name: "Walk-in Customer", phone: "", email: "", points: 0, tier: "None" },
+            { id: 2, name: "Amanda Silva", phone: "555-0144", email: "amanda@example.com", points: 420, tier: "Gold" },
+            { id: 3, name: "Noah Perera", phone: "555-0191", email: "noah@example.com", points: 160, tier: "Silver" },
+            { id: 4, name: "Maya Chen", phone: "555-0178", email: "maya@example.com", points: 92, tier: "Member" }
+        ];
 
-        const departments = ["All", "Produce", "Dairy", "Bakery", "Grocery", "Household"];
-        const productGrid = document.getElementById("productGrid");
-        const cartList = document.getElementById("cartList");
-        const tabs = document.getElementById("tabs");
+        const seedTransactions = [
+            { id: "R-10038", time: "2026-05-13 09:14", customerId: 2, payment: "Card", status: "Paid", items: [{ id: 2, quantity: 2 }, { id: 8, quantity: 4 }, { id: 10, quantity: 1 }] },
+            { id: "R-10039", time: "2026-05-13 11:27", customerId: 1, payment: "Cash", status: "Paid", items: [{ id: 5, quantity: 2 }, { id: 6, quantity: 6 }, { id: 12, quantity: 2 }] },
+            { id: "R-10040", time: "2026-05-13 13:45", customerId: 3, payment: "Mobile", status: "Paid", items: [{ id: 7, quantity: 1 }, { id: 3, quantity: 3 }, { id: 1, quantity: 2 }] }
+        ];
+
+        const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+        const storageKey = "flowsync-pos-state-v1";
+        const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
+        const state = saved || {
+            products: seedProducts,
+            customers: seedCustomers,
+            transactions: seedTransactions,
+            heldSales: [],
+            cart: [[1, 2], [3, 1], [5, 1]],
+            customerId: 1,
+            payment: "Card",
+            activeView: "sales",
+            activeDepartment: "All",
+            registerOpen: true,
+            taxRate: 0.08,
+            nextReceipt: 10041
+        };
+
+        const cart = new Map(state.cart);
+        const content = document.getElementById("content");
+        const modal = document.getElementById("modal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalBody = document.getElementById("modalBody");
+        const modalFoot = document.getElementById("modalFoot");
         const searchInput = document.getElementById("searchInput");
         const departmentSelect = document.getElementById("departmentSelect");
-        const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
 
-        let activeDepartment = "All";
-
-        function renderTabs() {
-            tabs.innerHTML = departments.map((department) => `
-                <button class="tab ${department === activeDepartment ? "active" : ""}" data-department="${department}">
-                    ${department}
-                </button>
-            `).join("");
+        function save() {
+            state.cart = Array.from(cart.entries());
+            localStorage.setItem(storageKey, JSON.stringify(state));
         }
 
-        function renderProducts() {
-            const query = searchInput.value.trim().toLowerCase();
-            const selected = departmentSelect.value;
-            const filtered = products.filter((product) => {
-                const matchesSearch = product.name.toLowerCase().includes(query) || product.department.toLowerCase().includes(query);
-                const matchesTab = activeDepartment === "All" || product.department === activeDepartment;
-                const matchesSelect = selected === "All" || product.department === selected;
-                return matchesSearch && matchesTab && matchesSelect;
-            });
+        function departments() {
+            return ["All", ...Array.from(new Set(state.products.map((product) => product.department)))];
+        }
 
-            productGrid.innerHTML = filtered.map((product) => `
-                <button class="product" data-id="${product.id}">
-                    <span class="product-art">
-                        <b>${product.icon}</b>
-                        <span class="stock ${product.stock <= 10 ? "low" : ""}">${product.stock} left</span>
-                    </span>
-                    <strong>${product.name}</strong>
-                    <small>${product.department} - ${product.unit}</small>
-                    <span class="price-row">
-                        <span class="price">${money.format(product.price)}</span>
-                        <span class="add">+</span>
-                    </span>
-                </button>
+        function productById(id) {
+            return state.products.find((product) => product.id === Number(id));
+        }
+
+        function customerById(id) {
+            return state.customers.find((customer) => customer.id === Number(id)) || state.customers[0];
+        }
+
+        function cartEntries() {
+            return Array.from(cart.entries()).map(([id, quantity]) => ({ ...productById(id), quantity }));
+        }
+
+        function saleTotals(items = cartEntries(), customerId = state.customerId) {
+            const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const customer = customerById(customerId);
+            const loyaltyDiscount = customer.tier === "Gold" ? subtotal * 0.05 : customer.tier === "Silver" ? subtotal * 0.03 : 0;
+            const bulkDiscount = subtotal >= 60 ? subtotal * 0.04 : 0;
+            const discount = Math.max(loyaltyDiscount, bulkDiscount);
+            const tax = (subtotal - discount) * state.taxRate;
+            return { subtotal, discount, tax, total: subtotal - discount + tax };
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            clearTimeout(showToast.timer);
+            showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+        }
+
+        function openModal(title, body, foot = "") {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = body;
+            modalFoot.innerHTML = foot;
+            modal.classList.add("open");
+        }
+
+        function closeModal() {
+            modal.classList.remove("open");
+        }
+
+        function renderShell() {
+            document.querySelectorAll(".nav-btn").forEach((button) => {
+                button.classList.toggle("active", button.dataset.view === state.activeView);
+            });
+            departmentSelect.innerHTML = departments().map((department) => `<option value="${department}">${department}</option>`).join("");
+            departmentSelect.value = state.activeDepartment;
+            document.getElementById("statusLine").textContent = state.registerOpen
+                ? "Register 03 - Main checkout - Shift open"
+                : "Register 03 - Register closed";
+            renderCart();
+            renderView();
+            save();
+        }
+
+        function renderView() {
+            if (state.activeView === "sales") renderSales();
+            if (state.activeView === "inventory") renderInventory();
+            if (state.activeView === "customers") renderCustomers();
+            if (state.activeView === "receipts") renderReceipts();
+            if (state.activeView === "reports") renderReports();
+            if (state.activeView === "settings") renderSettings();
+        }
+
+        function renderSales() {
+            const query = searchInput.value.trim().toLowerCase();
+            const filtered = state.products.filter((product) => {
+                const inDepartment = state.activeDepartment === "All" || product.department === state.activeDepartment;
+                const searchable = `${product.sku} ${product.name} ${product.department}`.toLowerCase();
+                return inDepartment && searchable.includes(query);
+            });
+            const lowStock = state.products.filter((product) => product.stock <= product.reorder);
+
+            content.innerHTML = `
+                <div class="sales-layout">
+                    <section>
+                        <div class="section-head">
+                            <h2>Product Catalog</h2>
+                            <div class="tabs">
+                                ${departments().map((department) => `<button class="tab ${department === state.activeDepartment ? "active" : ""}" data-department="${department}">${department}</button>`).join("")}
+                            </div>
+                        </div>
+                        <div class="product-grid">
+                            ${filtered.map((product) => `
+                                <button class="product-card" data-add="${product.id}">
+                                    <span class="product-art">
+                                        <b>${product.icon}</b>
+                                        <span class="stock ${product.stock <= product.reorder ? "low" : ""}">${product.stock} left</span>
+                                    </span>
+                                    <strong>${product.name}</strong>
+                                    <span class="muted">${product.department} - SKU ${product.sku}</span>
+                                    <span class="price-row">
+                                        <span class="price">${money.format(product.price)}</span>
+                                        <span class="add">+</span>
+                                    </span>
+                                </button>
+                            `).join("") || `<div class="panel">No products match this search.</div>`}
+                        </div>
+                    </section>
+                    <aside class="stack">
+                        <div class="metric"><span>Today sales</span><strong>${money.format(todaySales())}</strong></div>
+                        <div class="metric"><span>Transactions</span><strong>${state.transactions.length}</strong></div>
+                        <div class="panel">
+                            <h3>Inventory Alerts</h3>
+                            ${lowStock.slice(0, 5).map((product) => `
+                                <div class="summary-row"><span>${product.name}</span><strong class="badge warn">${product.stock}</strong></div>
+                            `).join("") || `<p class="muted">No low-stock items.</p>`}
+                        </div>
+                        <div class="panel">
+                            <h3>Held Sales</h3>
+                            ${state.heldSales.map((sale, index) => `
+                                <div class="summary-row"><span>${sale.name}</span><button class="ghost" data-recall="${index}">Recall</button></div>
+                            `).join("") || `<p class="muted">No held sales.</p>`}
+                        </div>
+                    </aside>
+                </div>
+            `;
+        }
+
+        function renderInventory() {
+            const rows = state.products.map((product) => `
+                <tr>
+                    <td>${product.sku}</td>
+                    <td><strong>${product.name}</strong><br><span class="muted">${product.department}</span></td>
+                    <td>${money.format(product.price)}</td>
+                    <td>${product.stock}</td>
+                    <td>${product.reorder}</td>
+                    <td><span class="badge ${product.stock <= product.reorder ? "warn" : ""}">${product.stock <= product.reorder ? "Reorder" : "OK"}</span></td>
+                    <td>
+                        <button class="ghost" data-restock="${product.id}">Restock</button>
+                        <button class="secondary" data-edit-product="${product.id}">Edit</button>
+                    </td>
+                </tr>
             `).join("");
+
+            content.innerHTML = `
+                <div class="section-head">
+                    <h2>Inventory Management</h2>
+                    <button class="primary" id="addProduct">Add Product</button>
+                </div>
+                <div class="data-grid">
+                    <div class="data-card"><span>Total SKUs</span><strong>${state.products.length}</strong></div>
+                    <div class="data-card"><span>Stock Value</span><strong>${money.format(stockValue())}</strong></div>
+                    <div class="data-card"><span>Low Stock</span><strong>${state.products.filter((p) => p.stock <= p.reorder).length}</strong></div>
+                    <div class="data-card"><span>Departments</span><strong>${departments().length - 1}</strong></div>
+                </div>
+                <table>
+                    <thead><tr><th>SKU</th><th>Product</th><th>Price</th><th>Stock</th><th>Reorder</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            `;
+        }
+
+        function renderCustomers() {
+            content.innerHTML = `
+                <div class="section-head">
+                    <h2>Customer Loyalty</h2>
+                    <button class="primary" id="addCustomer">Add Customer</button>
+                </div>
+                <div class="data-grid">
+                    <div class="data-card"><span>Profiles</span><strong>${state.customers.length - 1}</strong></div>
+                    <div class="data-card"><span>Points Issued</span><strong>${state.customers.reduce((sum, customer) => sum + customer.points, 0)}</strong></div>
+                    <div class="data-card"><span>Gold Members</span><strong>${state.customers.filter((c) => c.tier === "Gold").length}</strong></div>
+                    <div class="data-card"><span>Attached Now</span><strong>${customerById(state.customerId).tier}</strong></div>
+                </div>
+                <table>
+                    <thead><tr><th>Name</th><th>Contact</th><th>Tier</th><th>Points</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${state.customers.filter((customer) => customer.id !== 1).map((customer) => `
+                            <tr>
+                                <td><strong>${customer.name}</strong></td>
+                                <td>${customer.phone}<br><span class="muted">${customer.email}</span></td>
+                                <td><span class="badge">${customer.tier}</span></td>
+                                <td>${customer.points}</td>
+                                <td>
+                                    <button class="ghost" data-select-customer="${customer.id}">Attach</button>
+                                    <button class="secondary" data-edit-customer="${customer.id}">Edit</button>
+                                </td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderReceipts() {
+            content.innerHTML = `
+                <div class="section-head">
+                    <h2>Receipts and Returns</h2>
+                    <button class="secondary" id="exportReceipts">Export CSV</button>
+                </div>
+                <table>
+                    <thead><tr><th>Receipt</th><th>Time</th><th>Customer</th><th>Payment</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${state.transactions.slice().reverse().map((transaction) => {
+                            const totals = saleTotals(transaction.items.map((item) => ({ ...productById(item.id), quantity: item.quantity })), transaction.customerId);
+                            return `
+                                <tr>
+                                    <td><strong>${transaction.id}</strong></td>
+                                    <td>${transaction.time}</td>
+                                    <td>${customerById(transaction.customerId).name}</td>
+                                    <td>${transaction.payment}</td>
+                                    <td>${money.format(totals.total)}</td>
+                                    <td><span class="badge ${transaction.status === "Refunded" ? "bad" : ""}">${transaction.status}</span></td>
+                                    <td>
+                                        <button class="ghost" data-view-receipt="${transaction.id}">View</button>
+                                        <button class="secondary" data-refund="${transaction.id}">Refund</button>
+                                    </td>
+                                </tr>
+                            `;
+                        }).join("")}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderReports() {
+            const deptTotals = {};
+            state.transactions.filter((tx) => tx.status === "Paid").forEach((tx) => {
+                tx.items.forEach((item) => {
+                    const product = productById(item.id);
+                    deptTotals[product.department] = (deptTotals[product.department] || 0) + product.price * item.quantity;
+                });
+            });
+            const bestSellers = state.products.map((product) => {
+                const sold = state.transactions.reduce((sum, tx) => {
+                    if (tx.status !== "Paid") return sum;
+                    const item = tx.items.find((entry) => entry.id === product.id);
+                    return sum + (item ? item.quantity : 0);
+                }, 0);
+                return { ...product, sold };
+            }).sort((a, b) => b.sold - a.sold).slice(0, 6);
+
+            content.innerHTML = `
+                <div class="section-head"><h2>Sales Reports</h2><button class="secondary" id="endShift">End Shift</button></div>
+                <div class="data-grid">
+                    <div class="data-card"><span>Gross Sales</span><strong>${money.format(todaySales())}</strong></div>
+                    <div class="data-card"><span>Net Profit</span><strong>${money.format(todayProfit())}</strong></div>
+                    <div class="data-card"><span>Average Basket</span><strong>${money.format(avgBasket())}</strong></div>
+                    <div class="data-card"><span>Refunds</span><strong>${state.transactions.filter((tx) => tx.status === "Refunded").length}</strong></div>
+                </div>
+                <div class="sales-layout">
+                    <div class="panel">
+                        <h3>Department Revenue</h3>
+                        ${Object.entries(deptTotals).map(([department, total]) => `
+                            <div class="summary-row"><span>${department}</span><strong>${money.format(total)}</strong></div>
+                        `).join("")}
+                    </div>
+                    <div class="panel">
+                        <h3>Best Sellers</h3>
+                        ${bestSellers.map((product) => `
+                            <div class="summary-row"><span>${product.name}</span><strong>${product.sold} sold</strong></div>
+                        `).join("")}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSettings() {
+            content.innerHTML = `
+                <div class="section-head"><h2>Register Settings</h2></div>
+                <div class="form-grid">
+                    <label>Tax Rate<input id="taxInput" type="number" step="0.01" min="0" value="${state.taxRate}"></label>
+                    <label>Register Status<select id="registerStatus"><option value="open">Open</option><option value="closed">Closed</option></select></label>
+                    <button class="primary" id="saveSettings">Save Settings</button>
+                    <button class="danger" id="resetDemo">Reset Demo Data</button>
+                </div>
+                <div class="panel">
+                    <h3>System Coverage</h3>
+                    <p class="muted">This local POS includes sales checkout, product inventory, customer loyalty, held sales, receipts, refunds, shift reporting, tax settings, and browser persistence with localStorage.</p>
+                </div>
+            `;
+            document.getElementById("registerStatus").value = state.registerOpen ? "open" : "closed";
         }
 
         function renderCart() {
-            const entries = Array.from(cart.entries()).map(([id, quantity]) => {
-                const product = products.find((item) => item.id === id);
-                return { ...product, quantity };
-            });
+            const entries = cartEntries();
+            const customer = customerById(state.customerId);
+            document.getElementById("customerName").textContent = customer.name;
+            document.getElementById("customerMeta").textContent = customer.id === 1 ? "No loyalty profile attached" : `${customer.tier} member - ${customer.points} points`;
 
-            cartList.innerHTML = entries.map((item) => `
+            document.getElementById("cartList").innerHTML = entries.map((item) => `
                 <div class="cart-item">
                     <div>
                         <strong>${item.name}</strong>
                         <small>${money.format(item.price)} - ${item.unit}</small>
                         <div class="qty">
-                            <button data-action="decrease" data-id="${item.id}">-</button>
+                            <button data-cart-minus="${item.id}">-</button>
                             <span>${item.quantity}</span>
-                            <button data-action="increase" data-id="${item.id}">+</button>
+                            <button data-cart-plus="${item.id}">+</button>
+                            <button data-cart-remove="${item.id}">x</button>
                         </div>
                     </div>
                     <div class="item-total">${money.format(item.price * item.quantity)}</div>
                 </div>
-            `).join("");
+            `).join("") || `<div class="panel">Cart is empty.</div>`;
 
-            const subtotal = entries.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            const discount = subtotal > 40 ? subtotal * 0.05 : 0;
-            const tax = (subtotal - discount) * 0.08;
-            const total = subtotal - discount + tax;
-
-            document.getElementById("subtotal").textContent = money.format(subtotal);
-            document.getElementById("discount").textContent = `-${money.format(discount)}`;
-            document.getElementById("tax").textContent = money.format(tax);
-            document.getElementById("total").textContent = money.format(total);
+            const totals = saleTotals(entries);
+            document.getElementById("subtotal").textContent = money.format(totals.subtotal);
+            document.getElementById("discount").textContent = `-${money.format(totals.discount)}`;
+            document.getElementById("tax").textContent = money.format(totals.tax);
+            document.getElementById("total").textContent = money.format(totals.total);
+            document.querySelectorAll(".pay-type").forEach((button) => {
+                button.classList.toggle("active", button.dataset.payment === state.payment);
+            });
         }
 
         function addToCart(id) {
-            cart.set(id, (cart.get(id) || 0) + 1);
+            const product = productById(id);
+            if (!product || product.stock <= 0) {
+                showToast("Product is out of stock.");
+                return;
+            }
+            cart.set(Number(id), (cart.get(Number(id)) || 0) + 1);
             renderCart();
+            save();
         }
 
-        tabs.addEventListener("click", (event) => {
-            const button = event.target.closest(".tab");
-            if (!button) return;
-            activeDepartment = button.dataset.department;
-            renderTabs();
-            renderProducts();
-        });
+        function chargeSale() {
+            const entries = cartEntries();
+            if (!state.registerOpen) return showToast("Open the register before charging a sale.");
+            if (!entries.length) return showToast("Add at least one product to the cart.");
+            const oversold = entries.find((item) => item.quantity > item.stock);
+            if (oversold) return showToast(`${oversold.name} does not have enough stock.`);
 
-        productGrid.addEventListener("click", (event) => {
-            const card = event.target.closest(".product");
-            if (!card) return;
-            addToCart(Number(card.dataset.id));
-        });
-
-        cartList.addEventListener("click", (event) => {
-            const button = event.target.closest("button");
-            if (!button) return;
-            const id = Number(button.dataset.id);
-            const quantity = cart.get(id) || 0;
-            if (button.dataset.action === "increase") cart.set(id, quantity + 1);
-            if (button.dataset.action === "decrease") {
-                quantity <= 1 ? cart.delete(id) : cart.set(id, quantity - 1);
-            }
-            renderCart();
-        });
-
-        searchInput.addEventListener("input", renderProducts);
-        departmentSelect.addEventListener("change", renderProducts);
-
-        document.getElementById("quickAdd").addEventListener("click", () => {
-            const firstMatch = products.find((product) =>
-                product.name.toLowerCase().includes(searchInput.value.trim().toLowerCase())
-            );
-            addToCart(firstMatch ? firstMatch.id : products[0].id);
-        });
-
-        document.getElementById("voidSale").addEventListener("click", () => {
-            cart.clear();
-            renderCart();
-        });
-
-        document.querySelectorAll(".pay-type").forEach((button) => {
-            button.addEventListener("click", () => {
-                document.querySelectorAll(".pay-type").forEach((item) => item.classList.remove("active"));
-                button.classList.add("active");
+            entries.forEach((item) => {
+                productById(item.id).stock -= item.quantity;
             });
+            const receiptId = `R-${state.nextReceipt++}`;
+            const now = new Date();
+            const transaction = {
+                id: receiptId,
+                time: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`,
+                customerId: state.customerId,
+                payment: state.payment,
+                status: "Paid",
+                items: entries.map((item) => ({ id: item.id, quantity: item.quantity }))
+            };
+            state.transactions.push(transaction);
+            const customer = customerById(state.customerId);
+            if (customer.id !== 1) customer.points += Math.floor(saleTotals(entries).total);
+            cart.clear();
+            state.customerId = 1;
+            save();
+            renderShell();
+            viewReceipt(receiptId);
+            showToast(`Sale charged: ${receiptId}`);
+        }
+
+        function viewReceipt(receiptId) {
+            const tx = state.transactions.find((transaction) => transaction.id === receiptId);
+            if (!tx) return;
+            const items = tx.items.map((item) => ({ ...productById(item.id), quantity: item.quantity }));
+            const totals = saleTotals(items, tx.customerId);
+            openModal("Receipt", `
+                <div class="receipt" id="receiptPrint">
+                    <strong>FreshMart Supermarket</strong>
+                    <span>Receipt ${tx.id}</span>
+                    <span>${tx.time} - ${tx.payment} - ${tx.status}</span>
+                    <span>Customer: ${customerById(tx.customerId).name}</span>
+                    <hr>
+                    ${items.map((item) => `<span>${item.quantity} x ${item.name} ${money.format(item.price * item.quantity)}</span>`).join("")}
+                    <hr>
+                    <span>Subtotal: ${money.format(totals.subtotal)}</span>
+                    <span>Discount: -${money.format(totals.discount)}</span>
+                    <span>Tax: ${money.format(totals.tax)}</span>
+                    <strong>Total: ${money.format(totals.total)}</strong>
+                </div>
+            `, `<button class="secondary" onclick="window.print()">Print</button><button class="primary" id="doneModal">Done</button>`);
+        }
+
+        function holdSale() {
+            const entries = cartEntries();
+            if (!entries.length) return showToast("Cart is empty.");
+            state.heldSales.push({
+                name: `Hold ${state.heldSales.length + 1} - ${customerById(state.customerId).name}`,
+                customerId: state.customerId,
+                payment: state.payment,
+                cart: Array.from(cart.entries())
+            });
+            cart.clear();
+            state.customerId = 1;
+            save();
+            renderShell();
+            showToast("Sale placed on hold.");
+        }
+
+        function recallSale(index = 0) {
+            if (!state.heldSales.length) return showToast("No held sales to recall.");
+            const sale = state.heldSales.splice(Number(index), 1)[0];
+            cart.clear();
+            sale.cart.forEach(([id, qty]) => cart.set(Number(id), qty));
+            state.customerId = sale.customerId;
+            state.payment = sale.payment;
+            save();
+            renderShell();
+            showToast("Held sale recalled.");
+        }
+
+        function attachCustomerDialog() {
+            openModal("Attach Customer", `
+                <table>
+                    <thead><tr><th>Name</th><th>Phone</th><th>Tier</th><th></th></tr></thead>
+                    <tbody>
+                        ${state.customers.map((customer) => `
+                            <tr>
+                                <td>${customer.name}</td>
+                                <td>${customer.phone || "-"}</td>
+                                <td>${customer.tier}</td>
+                                <td><button class="primary" data-modal-customer="${customer.id}">Attach</button></td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            `, `<button class="secondary" id="doneModal">Cancel</button>`);
+        }
+
+        function productDialog(product = null) {
+            const editing = Boolean(product);
+            openModal(editing ? "Edit Product" : "Add Product", `
+                <div class="form-grid">
+                    <input id="pSku" placeholder="SKU" value="${product?.sku || ""}">
+                    <input id="pName" placeholder="Product name" value="${product?.name || ""}">
+                    <input id="pDepartment" placeholder="Department" value="${product?.department || ""}">
+                    <input id="pPrice" type="number" step="0.01" placeholder="Price" value="${product?.price || ""}">
+                    <input id="pCost" type="number" step="0.01" placeholder="Cost" value="${product?.cost || ""}">
+                    <input id="pStock" type="number" placeholder="Stock" value="${product?.stock || ""}">
+                    <input id="pReorder" type="number" placeholder="Reorder level" value="${product?.reorder || ""}">
+                    <input id="pIcon" placeholder="Tile code" value="${product?.icon || ""}">
+                </div>
+            `, `<button class="secondary" id="doneModal">Cancel</button><button class="primary" data-save-product="${product?.id || ""}">Save Product</button>`);
+        }
+
+        function customerDialog(customer = null) {
+            openModal(customer ? "Edit Customer" : "Add Customer", `
+                <div class="form-grid">
+                    <input id="cName" placeholder="Name" value="${customer?.name || ""}">
+                    <input id="cPhone" placeholder="Phone" value="${customer?.phone || ""}">
+                    <input id="cEmail" placeholder="Email" value="${customer?.email || ""}">
+                    <select id="cTier">
+                        ${["Member", "Silver", "Gold"].map((tier) => `<option value="${tier}">${tier}</option>`).join("")}
+                    </select>
+                    <input id="cPoints" type="number" placeholder="Points" value="${customer?.points || 0}">
+                </div>
+            `, `<button class="secondary" id="doneModal">Cancel</button><button class="primary" data-save-customer="${customer?.id || ""}">Save Customer</button>`);
+            document.getElementById("cTier").value = customer?.tier || "Member";
+        }
+
+        function todaySales() {
+            return state.transactions.filter((tx) => tx.status === "Paid").reduce((sum, tx) => {
+                const items = tx.items.map((item) => ({ ...productById(item.id), quantity: item.quantity }));
+                return sum + saleTotals(items, tx.customerId).total;
+            }, 0);
+        }
+
+        function todayProfit() {
+            return state.transactions.filter((tx) => tx.status === "Paid").reduce((sum, tx) => {
+                return sum + tx.items.reduce((itemSum, item) => {
+                    const product = productById(item.id);
+                    return itemSum + (product.price - product.cost) * item.quantity;
+                }, 0);
+            }, 0);
+        }
+
+        function avgBasket() {
+            const paid = state.transactions.filter((tx) => tx.status === "Paid");
+            return paid.length ? todaySales() / paid.length : 0;
+        }
+
+        function stockValue() {
+            return state.products.reduce((sum, product) => sum + product.cost * product.stock, 0);
+        }
+
+        document.addEventListener("click", (event) => {
+            const target = event.target.closest("button");
+            if (!target) return;
+
+            if (target.dataset.view) {
+                state.activeView = target.dataset.view;
+                renderShell();
+            }
+            if (target.dataset.department) {
+                state.activeDepartment = target.dataset.department;
+                departmentSelect.value = state.activeDepartment;
+                renderSales();
+                save();
+            }
+            if (target.dataset.add) addToCart(target.dataset.add);
+            if (target.dataset.cartPlus) addToCart(target.dataset.cartPlus);
+            if (target.dataset.cartMinus) {
+                const id = Number(target.dataset.cartMinus);
+                const qty = cart.get(id) || 0;
+                qty <= 1 ? cart.delete(id) : cart.set(id, qty - 1);
+                renderCart();
+                save();
+            }
+            if (target.dataset.cartRemove) {
+                cart.delete(Number(target.dataset.cartRemove));
+                renderCart();
+                save();
+            }
+            if (target.dataset.payment) {
+                state.payment = target.dataset.payment;
+                renderCart();
+                save();
+            }
+            if (target.id === "quickAdd") {
+                const query = searchInput.value.trim().toLowerCase();
+                const product = state.products.find((item) => `${item.sku} ${item.name}`.toLowerCase().includes(query)) || state.products[0];
+                addToCart(product.id);
+            }
+            if (target.id === "voidSale") {
+                cart.clear();
+                state.customerId = 1;
+                renderShell();
+                showToast("Current sale voided.");
+            }
+            if (target.id === "holdSale") holdSale();
+            if (target.id === "recallSale") recallSale();
+            if (target.dataset.recall) recallSale(target.dataset.recall);
+            if (target.id === "chargeSale") chargeSale();
+            if (target.id === "attachCustomer") attachCustomerDialog();
+            if (target.dataset.modalCustomer) {
+                state.customerId = Number(target.dataset.modalCustomer);
+                closeModal();
+                renderShell();
+            }
+            if (target.dataset.selectCustomer) {
+                state.customerId = Number(target.dataset.selectCustomer);
+                renderShell();
+                showToast("Customer attached to current sale.");
+            }
+            if (target.id === "addProduct") productDialog();
+            if (target.dataset.editProduct) productDialog(productById(target.dataset.editProduct));
+            if (target.dataset.restock) {
+                productById(target.dataset.restock).stock += 12;
+                renderShell();
+                showToast("Product restocked by 12 units.");
+            }
+            if (target.dataset.saveProduct !== undefined) {
+                const id = Number(target.dataset.saveProduct);
+                const product = id ? productById(id) : { id: Date.now() };
+                Object.assign(product, {
+                    sku: document.getElementById("pSku").value || String(product.id),
+                    name: document.getElementById("pName").value || "New Product",
+                    department: document.getElementById("pDepartment").value || "General",
+                    price: Number(document.getElementById("pPrice").value || 0),
+                    cost: Number(document.getElementById("pCost").value || 0),
+                    stock: Number(document.getElementById("pStock").value || 0),
+                    reorder: Number(document.getElementById("pReorder").value || 0),
+                    icon: document.getElementById("pIcon").value || "NP"
+                });
+                if (!id) state.products.push(product);
+                closeModal();
+                renderShell();
+            }
+            if (target.id === "addCustomer") customerDialog();
+            if (target.dataset.editCustomer) customerDialog(customerById(target.dataset.editCustomer));
+            if (target.dataset.saveCustomer !== undefined) {
+                const id = Number(target.dataset.saveCustomer);
+                const customer = id ? customerById(id) : { id: Date.now() };
+                Object.assign(customer, {
+                    name: document.getElementById("cName").value || "New Customer",
+                    phone: document.getElementById("cPhone").value || "",
+                    email: document.getElementById("cEmail").value || "",
+                    tier: document.getElementById("cTier").value,
+                    points: Number(document.getElementById("cPoints").value || 0)
+                });
+                if (!id) state.customers.push(customer);
+                closeModal();
+                renderShell();
+            }
+            if (target.dataset.viewReceipt) viewReceipt(target.dataset.viewReceipt);
+            if (target.dataset.refund) {
+                const tx = state.transactions.find((item) => item.id === target.dataset.refund);
+                if (tx && tx.status !== "Refunded") {
+                    tx.status = "Refunded";
+                    tx.items.forEach((item) => productById(item.id).stock += item.quantity);
+                    renderShell();
+                    showToast("Receipt refunded and stock returned.");
+                }
+            }
+            if (target.id === "exportReceipts") {
+                const csv = ["receipt,time,customer,payment,status"].concat(state.transactions.map((tx) => `${tx.id},${tx.time},${customerById(tx.customerId).name},${tx.payment},${tx.status}`)).join("\\n");
+                openModal("Receipt Export", `<textarea style="width:100%;min-height:220px">${csv}</textarea>`, `<button class="primary" id="doneModal">Done</button>`);
+            }
+            if (target.id === "endShift") {
+                state.registerOpen = false;
+                renderShell();
+                showToast("Shift ended. Register is now closed.");
+            }
+            if (target.id === "saveSettings") {
+                state.taxRate = Number(document.getElementById("taxInput").value || 0);
+                state.registerOpen = document.getElementById("registerStatus").value === "open";
+                renderShell();
+                showToast("Settings saved.");
+            }
+            if (target.id === "resetDemo") {
+                localStorage.removeItem(storageKey);
+                location.reload();
+            }
+            if (target.id === "closeModal" || target.id === "doneModal") closeModal();
+        });
+
+        searchInput.addEventListener("input", () => {
+            if (state.activeView !== "sales") state.activeView = "sales";
+            renderShell();
+        });
+
+        departmentSelect.addEventListener("change", () => {
+            state.activeDepartment = departmentSelect.value;
+            state.activeView = "sales";
+            renderShell();
         });
 
         function updateClock() {
@@ -984,11 +1381,9 @@
             }).format(new Date());
         }
 
-        renderTabs();
-        renderProducts();
-        renderCart();
         updateClock();
         setInterval(updateClock, 30000);
+        renderShell();
     </script>
 </body>
 </html>
